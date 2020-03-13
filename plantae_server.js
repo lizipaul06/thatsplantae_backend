@@ -8,7 +8,7 @@ const createRouter = require('./helpers/create_router.js');
 app.use(cors());
 app.use(bodyParser.json());
 
-MongoClient.connect('mongodb://localhost:27017')
+MongoClient.connect('mongodb+srv://<username>:<password>@thatsplantae-mpmxw.mongodb.net/test?retryWrites=true&w=majority')
 .then((client) => {
   const db = client.db('garden');
   const plantsCollection = db.collection('plants');
