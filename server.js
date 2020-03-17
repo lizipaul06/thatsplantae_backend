@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const MongoClient = require('mongodb').MongoClient;
+
 const createRouter = require('/Users/elizabethpaul/CX_G17/codeclan_work/thatsplantaebackend/thatsplantae_backend/helpers/create_router.js');
 
 app.use(cors());
@@ -23,6 +23,7 @@ const client = new MongoClient(uri, { useNewUrlParser: true });
 client.connect(err => {
   const collection = client.db("garden").collection("plants");
   // perform actions on the collection object
+  const plantsRouter = createRouter(collection);
   app.use('/api/garden', plantsRouter);
   client.close();
 });
