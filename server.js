@@ -22,9 +22,10 @@ require('dotenv').config();
 // });
 
 
+
 // connect Mongoose to your DB
 var mongoose = require(‘mongoose’);
-mongoose.connect(process.env.MONGODB_URI || mongodb:user1:6d@ag8F!s9waCNM@ds259119.mlab.com:59119/heroku_75k010c4);
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/thatsplantaebackend');
 
 const port = process.env.PORT || 3000;
 app.listen(port);
