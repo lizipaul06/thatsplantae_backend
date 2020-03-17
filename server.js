@@ -5,6 +5,19 @@ const bodyParser = require('body-parser');
 // const MongoClient = require('mongodb').MongoClient;
 const createRouter = require('./helpers/create_router.js');
 
+var express = require('express')
+var cors = require('cors')
+var app = express()
+
+app.use(cors())
+
+app.get('/products/:id', function (req, res, next) {
+  res.json({msg: 'This is CORS-enabled for all origins!'})
+})
+
+app.listen(80, function () {
+  console.log('CORS-enabled web server listening on port 80')
+})
 
 const db = process.env.MONGODB_URL;
 
@@ -20,11 +33,3 @@ const connectDB = async () => {
     process.exit(1);
   }
 };
-
-
-// cors origin URL - Allow inbound traffic from origin
-corsOptions = {
-  origin: "Your FrontEnd Website URL",
-  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-};
-app.use(cors(corsOptions));
