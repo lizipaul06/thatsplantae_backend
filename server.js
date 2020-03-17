@@ -5,27 +5,26 @@ const bodyParser = require('body-parser');
 // const MongoClient = require('mongodb').MongoClient;
 const createRouter = require('./helpers/create_router.js');
 
-app.use(cors());
-app.use(bodyParser.json());
-require('dotenv').config();
 
-// .then((client) => {
-//   const db = client.db('garden');
-//   const plantsCollection = db.collection('plants');
-//   const plantsRouter = createRouter(plantsCollection);
-//   app.use('/api/garden', plantsRouter);
-// })
-// .catch((err) => {
-//   console.error(err);
-//   res.status(500);
-//   res.json({status:500, error: err});
-// });
+const db = process.env.MONGODB_URL;
+
+const connectDB = async () => {
+  try {
+    await mongoose.connect(db, {
+      useUnifiedTopology: true,
+      useNewUrlParser: true
+    });
+    console.log("MongoDB is Connected...");
+  } catch (err) {
+    console.error(err.message);
+    process.exit(1);
+  }
+};
 
 
-
-// connect Mongoose to your DB
-var mongoose = require(‘mongoose’);
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/thatsplantaebackend');
-
-const port = process.env.PORT || 3000;
-app.listen(port);
+// cors origin URL - Allow inbound traffic from origin
+corsOptions = {
+  origin: "Your FrontEnd Website URL",
+  optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.use(cors(corsOptions));
