@@ -25,7 +25,7 @@ client.connect(err => {
   // perform actions on the collection object
   const plantsRouter = createRouter(collection);
   app.use('/api/garden', plantsRouter);
-  client.close();
+
 });
 
 app.listen(3000, function() {
